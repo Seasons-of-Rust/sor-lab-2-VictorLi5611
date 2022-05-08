@@ -49,13 +49,18 @@ fn calculate_safety_status(
     has_carrot: bool,
     friends_nearby: i32,
 ) -> bool {
-    if !wolves_nearby && day_time{
+    // if !wolves_nearby && day_time {
+    //     return true;
+    // } else if has_carrot {
+    //     return true;
+    // } else if friends_nearby > 3 {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+    if (!wolves_nearby && day_time) || has_carrot || friends_nearby > 3 {
         return true;
-    }else if has_carrot {
-        return true;
-    }else if friends_nearby > 3{
-        return true;
-    }else {
+    } else {
         return false;
     }
 }
@@ -77,16 +82,16 @@ fn validate_simulation() {
 fn simulate(starting_rabbits: i128) -> i32 {
     let mut count = 0;
     let mut current_popn = starting_rabbits;
-    while current_popn != 1{
-        if current_popn % 2 == 0{
+    while current_popn != 1 {
+        if current_popn % 2 == 0 {
             current_popn = current_popn / 2;
             count += 1;
-        }else{
+        } else {
             current_popn = (3 * current_popn) + 1;
             count += 1;
         }
     }
-    return count;
+    count
 }
 
 #[cfg(test)]
